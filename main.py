@@ -16,28 +16,48 @@ def find_patt(image, patt, thres):
 
 
 if __name__ == '__main__':
-  screenshot = ImageGrab.grab()
-
-  img = np.array(screenshot.getdata(), dtype='uint8').reshape((screenshot.size[1],screenshot.size[0],3))
-
-  #rescaled = (255.0 / img.max() * (img - img.min())).astype(np.uint8)
-
-  #im = Image.fromarray(rescaled)
-  #im.save('test2.png')
-
-  patt = cv2.imread('butt03.png', 0)#Enter your button
-  h,w,points = find_patt(img, patt, 0.60)
-  #print(list(points)[0][0]+w/2)
-  arr=list(points)
-  #print (list(points)[0][1])
-  if len(arr)!=0:
-    #pyautogui.moveTo(650, 100)
-    #print(list(points))
-    #print(list(points)[0][1])
-    #pyautogui.moveTo(list(points)[0][0]+w/2, list(points)[0][1]+h/2)
-    #time.sleep(1)
-    #pyautogui.click()
-    print(arr[0][0]+w/2, arr[0][1]+h/2)
-    #pyautogui.click(x=650, y=700, clicks=3, interval=1)
-    pyautogui.click(x=arr[0][0]+w/2, y=arr[0][1]+h/2, clicks=1, interval=1)
-    print("finish")
+  while(True):
+    screenshot = ImageGrab.grab()
+    img = np.array(screenshot.getdata(), dtype='uint8').reshape((screenshot.size[1],screenshot.size[0],3))
+    patt1 = cv2.imread('animal.png', 0)#Enter your button
+    patt2 = cv2.imread('animal02.png', 0)  # Enter your button
+    patt3 = cv2.imread('animal03.png', 0)  # Enter your button
+    patt4 = cv2.imread('animal04.png', 0)  # Enter your button
+    h,w,points = find_patt(img, patt1, 0.60)
+    arr=list(points)
+    if len(arr)!=0:
+      print(arr[0][0]+w/2, arr[0][1]+h/2)
+      pyautogui.click(x=arr[0][0]+w/2, y=arr[0][1]+h/2, clicks=1, interval=1)
+      print("Олень найден!")
+    else:
+      h, w, points = find_patt(img, patt2, 0.60)
+      arr = list(points)
+      if len(arr) != 0:
+        print(arr[0][0] + w / 2, arr[0][1] + h / 2)
+        pyautogui.click(x=arr[0][0] + w / 2, y=arr[0][1] + h / 2, clicks=1, interval=1)
+        print("Олень найден!")
+      else:
+        h, w, points = find_patt(img, patt3, 0.60)
+        arr = list(points)
+        if len(arr) != 0:
+          print(arr[0][0] + w / 2, arr[0][1] + h / 2)
+          pyautogui.click(x=arr[0][0] + w / 2, y=arr[0][1] + h / 2, clicks=1, interval=1)
+          print("Олень найден!")
+        else:
+          h, w, points = find_patt(img, patt3, 0.60)
+          arr = list(points)
+          if len(arr) != 0:
+            print(arr[0][0] + w / 2, arr[0][1] + h / 2)
+            pyautogui.click(x=arr[0][0] + w / 2, y=arr[0][1] + h / 2, clicks=1, interval=1)
+            print("Олень найден!")
+          else:
+            h, w, points = find_patt(img, patt4, 0.60)
+            arr = list(points)
+            if len(arr) != 0:
+              print(arr[0][0] + w / 2, arr[0][1] + h / 2)
+              pyautogui.click(x=arr[0][0] + w / 2, y=arr[0][1] + h / 2, clicks=1, interval=1)
+              print("Олень найден!")
+            else:
+              print("Олень не найден")
+    time.sleep(1)
+  print("finish")
